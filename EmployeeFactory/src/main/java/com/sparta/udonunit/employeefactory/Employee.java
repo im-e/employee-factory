@@ -2,7 +2,8 @@ package com.sparta.udonunit.employeefactory;
 
 import java.time.LocalDate;
 
-public class DTO {
+public class Employee {
+
     private final int empId;
     private final String title;
     private final String firstName;
@@ -15,8 +16,8 @@ public class DTO {
     private final int salary;
 
 
-    public DTO(int empId, String title, String firstName, String middleInitial, String lastName, String gender,
-               String email, LocalDate dob, LocalDate hireDate, int salary) {
+    public Employee(int empId, String title, String firstName, String middleInitial, String lastName, String gender,
+                    String email, LocalDate dob, LocalDate hireDate, int salary) {
         this.empId = empId;
         this.title = title;
         this.firstName = firstName;
