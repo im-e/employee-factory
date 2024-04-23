@@ -27,7 +27,6 @@ public class EmployeeFactory {
             e.printStackTrace();
         }
 
-
         Collections.shuffle(result);
         return result.subList(0, numEmployees).toArray(new String[0]);
     }
