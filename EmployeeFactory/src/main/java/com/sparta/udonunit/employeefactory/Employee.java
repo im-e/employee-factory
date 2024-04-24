@@ -10,7 +10,7 @@ public record Employee(int empId, String title, String firstName, String middleI
 
     @Override
     public String toString() {
-        return "DTO{" +
+        return "Employee{" +
                 "empId=" + empId +
                 ", title='" + title + '\'' +
                 ", firstName='" + firstName + '\'' +
