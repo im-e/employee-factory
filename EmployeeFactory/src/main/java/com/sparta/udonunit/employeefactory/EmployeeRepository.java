@@ -8,4 +8,5 @@ public interface EmployeeRepository {
     List<Employee> getEmployeesByHiredDateRange(LocalDate startDate, LocalDate endDate);
     List<Employee> getEmployeesByLastName(String lastName);
     List<Employee> getEmployeeByAgeRange(Integer minAge, Integer maxAge);
+
 }

@@ -6,12 +6,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeList {
-    List<Employee> employees = new ArrayList<>();
+    private static List<Employee> employeeList;
 
     public EmployeeList(){
+        String[] employeeData = EmployeeFactory.getEmployees(1000);
+        employeeList = new ArrayList<>(convertEmployeeDataListIntoObjects(employeeData));
     }
 
-    public List<Employee> convertEmployeeDataListIntoObjects(String[] employeeData) {
+    public List<Employee> getEmployeeList() {
+        return employeeList;
+    }
+
+    private List<Employee> convertEmployeeDataListIntoObjects(String[] employeeData) {
+        List<Employee> employees = new ArrayList<>();
 
         for (String data : employeeData) {
             String[] values = data.split(",");
@@ -23,8 +30,8 @@ public class EmployeeList {
             String lastName = values[4];
             String gender = values[5];
             String email = values[6];
-            LocalDate dob = LocalDate.parse(values[7], DateTimeFormatter.ofPattern("dd/mm/yyyy"));
-            LocalDate hireDate = LocalDate.parse(values[8], DateTimeFormatter.ofPattern("dd/mm/yyyy"));
+            LocalDate dob = LocalDate.parse(values[7], DateTimeFormatter.ofPattern("M/d/y"));
+            LocalDate hireDate = LocalDate.parse(values[8], DateTimeFormatter.ofPattern("M/d/y"));
             int salary = Integer.parseInt(values[9]);
 
             Employee employee = new Employee(empId, prefix, firstName, middleInitial, lastName,
@@ -34,5 +41,6 @@ public class EmployeeList {
 
         return employees;
     }
+
 }
 
