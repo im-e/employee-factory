@@ -8,6 +8,7 @@ import java.util.List;
 public class EmployeeList {
     private static List<Employee> employeeList;
 
+    // Constructor populates employeeList by calling EmployeeFactory.
     public EmployeeList(){
         String[] employeeData = EmployeeFactory.getEmployees(1000);
         employeeList = new ArrayList<>(convertEmployeeDataListIntoObjects(employeeData));

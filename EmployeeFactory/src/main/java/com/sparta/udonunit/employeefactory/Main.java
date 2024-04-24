@@ -9,8 +9,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         //System.out.println(Arrays.asList(EmployeeFactory.getEmployees(20)));
+        // New instance of EmployeeList
         EmployeeList employeeList = new EmployeeList();
+        // employee repository is passed generated list of employees from EmployeeList
         EmployeeRepositoryImpl employeeRepository = new EmployeeRepositoryImpl(employeeList.getEmployeeList());
+        //getEmployeeByID is passed the id of the first employee on the generated employee list, and returns the coresponding employee
         System.out.println(employeeRepository.getEmployeeByID(employeeList.getEmployeeList().getFirst().empId()));
 
 

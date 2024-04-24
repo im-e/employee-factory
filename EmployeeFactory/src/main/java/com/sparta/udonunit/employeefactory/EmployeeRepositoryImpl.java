@@ -14,7 +14,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public Employee getEmployeeByID(Integer id) {
         for (Employee employee : employees ){
-            if(employee.empId() == (id)){
+            if(employee.empId() == id){
                 return employee;
             }
         }
