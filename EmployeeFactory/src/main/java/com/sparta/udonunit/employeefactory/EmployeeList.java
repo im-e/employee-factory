@@ -23,8 +23,8 @@ public class EmployeeList {
             String lastName = values[4];
             String gender = values[5];
             String email = values[6];
-            LocalDate dob = LocalDate.parse(values[7], DateTimeFormatter.ofPattern("MM/dd/yyyy"));
-            LocalDate hireDate = LocalDate.parse(values[8], DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+            LocalDate dob = LocalDate.parse(values[7], DateTimeFormatter.ofPattern("dd/mm/yyyy"));
+            LocalDate hireDate = LocalDate.parse(values[8], DateTimeFormatter.ofPattern("dd/mm/yyyy"));
             int salary = Integer.parseInt(values[9]);
 
             Employee employee = new Employee(empId, prefix, firstName, middleInitial, lastName,
