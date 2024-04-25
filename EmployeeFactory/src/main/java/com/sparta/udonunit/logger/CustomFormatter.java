@@ -5,16 +5,12 @@ import java.util.logging.LogRecord;
 
 public class CustomFormatter extends Formatter {
 
-    private final String classname;
-
-    public CustomFormatter(String className) {
-        this.classname = className;
+    public CustomFormatter() {
     }
 
     @Override
     public String format(LogRecord record) {
-        return classname
-                + " [" + record.getLevel()
+        return  " [" + record.getLevel()
                 + "] -> " + record.getMessage()
                 + "\n";
     }

@@ -9,8 +9,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class EmployeeFactory {
+    public static String[] getEmployees(int numEmployees) throws IllegalArgumentException{
 
-    public static String[] getEmployees(int numEmployees) throws IllegalArgumentException {
         if (numEmployees < 1 || numEmployees > 1000) {
             throw new IllegalArgumentException("Argument 'numEmployees' must be between 1 and 1000");
         }

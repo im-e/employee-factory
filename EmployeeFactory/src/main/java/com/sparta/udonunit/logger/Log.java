@@ -10,6 +10,8 @@ public class Log {
     private static final Logger CONSOLE_LOGGER = Logger.getLogger("ConsoleLogger");
     private static final Logger FILE_LOGGER = Logger.getLogger("FileLogger");
 
+    private static String currentClassName;
+
     // ANSI escape code
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -21,56 +23,57 @@ public class Log {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-
-    public static void init(String className) throws IOException {
+    public static void init() throws IOException {
         CONSOLE_LOGGER.setUseParentHandlers(false);
-        CONSOLE_LOGGER.addHandler(getConsoleHandler(className));
+        CONSOLE_LOGGER.addHandler(getConsoleHandler());
         CONSOLE_LOGGER.setLevel(Level.CONFIG);
 
         FILE_LOGGER.setUseParentHandlers(false);
-        FILE_LOGGER.addHandler(getFileHandler(className));
+        FILE_LOGGER.addHandler(getFileHandler());
         FILE_LOGGER.setLevel(Level.ALL);
     }
 
-    private static ConsoleHandler getConsoleHandler(String className){
+    public static void setClassName(String className) { currentClassName = className;}
+
+    private static ConsoleHandler getConsoleHandler(){
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.CONFIG);
-        consoleHandler.setFormatter(new CustomFormatter(className));
+        consoleHandler.setFormatter(new CustomFormatter());
 
         return consoleHandler;
     }
 
-    private static FileHandler getFileHandler(String className) throws IOException {
+    private static FileHandler getFileHandler() throws IOException {
         FileHandler fileHandler = new FileHandler("src/main/resources/logfile.log");
         fileHandler.setLevel(Level.ALL);
-        fileHandler.setFormatter(new CustomFormatter(className));
+        fileHandler.setFormatter(new CustomFormatter());
 
         return fileHandler;
     }
 
 
     public static void severe(String logging) {
-        CONSOLE_LOGGER.severe(ANSI_RED + logging + ANSI_RESET);
+        CONSOLE_LOGGER.severe(ANSI_RED + "(" + currentClassName + ") " + logging + ANSI_RESET);
         FILE_LOGGER.severe(logging);
     }
 
     public static void warning(String logging) {
-        CONSOLE_LOGGER.warning(ANSI_YELLOW + logging + ANSI_RESET);
+        CONSOLE_LOGGER.warning(ANSI_YELLOW + "(" + currentClassName + ") " + logging + ANSI_RESET);
         FILE_LOGGER.warning(logging);
     }
 
     public static void info(String logging) {
-        CONSOLE_LOGGER.info(ANSI_GREEN + logging + ANSI_RESET);
+        CONSOLE_LOGGER.info(ANSI_GREEN + "(" + currentClassName + ") " + logging + ANSI_RESET);
         FILE_LOGGER.info(logging);
     }
 
     public static void config(String logging) {
-        CONSOLE_LOGGER.config(ANSI_BLUE + logging + ANSI_RESET);
+        CONSOLE_LOGGER.config(ANSI_BLUE + "(" + currentClassName + ") " + logging + ANSI_RESET);
         FILE_LOGGER.config(logging);
     }
 
-    public static void fine(String logging) {
-        FILE_LOGGER.config(logging);
+    public void fine(String logging) {
+        FILE_LOGGER.config( "(" + currentClassName + ") " + logging);
     }
 
 

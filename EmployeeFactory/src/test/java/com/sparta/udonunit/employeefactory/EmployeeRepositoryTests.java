@@ -19,18 +19,18 @@ public class EmployeeRepositoryTests {
 
     @BeforeEach
     public void setUpBeforeClass() throws Exception {
-        Employee e1 = new Employee(198429, "Mrs.", "Serafina", "I", "Bumgarner",
-                "F", "serafina.bumgarner@exxonmobil.com",
+        Employee e1 = new Employee(198429, "Mrs.", "Serafina", 'I', "Bumgarner",
+                'F', "serafina.bumgarner@exxonmobil.com",
                 LocalDate.parse("9/21/1982", DateTimeFormatter.ofPattern("M/d/y")),
                 LocalDate.parse("2/1/2008", DateTimeFormatter.ofPattern("M/d/y"))
                 , 69294);
-        Employee e2 = new Employee(178566, "Mrs.", "Juliette", "M", "Rojo",
-                "F", "juliette.rojo@yahoo.co.uk",
+        Employee e2 = new Employee(178566, "Mrs.", "Juliette", 'M', "Rojo",
+                'F', "juliette.rojo@yahoo.co.uk",
                 LocalDate.parse("5/8/1967", DateTimeFormatter.ofPattern("M/d/y")),
                 LocalDate.parse("5/26/2011", DateTimeFormatter.ofPattern("M/d/y"))
                 , 193912);
-        Employee e3 = new Employee(540293, "Mrs.", "Jerafina", "I", "Bumjarner",
-                "F", "jerafina.bumjarner@exxonmobil.com",
+        Employee e3 = new Employee(540293, "Mrs.", "Jerafina", 'I', "Bumjarner",
+                'F', "jerafina.bumjarner@exxonmobil.com",
                 LocalDate.parse("9/21/1982", DateTimeFormatter.ofPattern("M/d/y")),
                 LocalDate.parse("2/1/2008", DateTimeFormatter.ofPattern("M/d/y"))
                 , 69295);
@@ -60,7 +60,7 @@ public class EmployeeRepositoryTests {
         String givenLastName = "Bumgarner";
         int expectedID = 198429;
         boolean matchedExpectedID = false;
-        List<Employee> expectedEmployees = employeeRepository.getEmployeesByLastName(givenLastName);
+        List<Employee> expectedEmployees = employeeRepository.getEmployeeByEitherPartialOrFullLastName(givenLastName);
         for (Employee employee : expectedEmployees) {
             if (employee.empId() == expectedID) {
                 matchedExpectedID = true;
@@ -78,7 +78,7 @@ public class EmployeeRepositoryTests {
         final int expectedID2 = 540293;
         boolean matchedExpectedID1 = false;
         boolean matchedExpectedID2 = false;
-        List<Employee> expectedEmployees = employeeRepository.getEmployeesByLastName(givenPartialLastName);
+        List<Employee> expectedEmployees = employeeRepository.getEmployeeByEitherPartialOrFullLastName(givenPartialLastName);
         for (Employee employee : expectedEmployees) {
             switch (employee.empId()) {
                 case expectedID1 -> matchedExpectedID1 = true;
