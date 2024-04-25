@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import com.sparta.udonunit.logger.Log;
+import com.sparta.udonunit.logging.Log;
 
 public class EmployeeDataHandler {
     private static List<Employee> employeeList;
@@ -13,14 +13,13 @@ public class EmployeeDataHandler {
 
     // Constructor populates employeeList by calling EmployeeFactory.
     public EmployeeDataHandler() throws IOException {
-        Log.setClassName(EmployeeDataHandler.class.getSimpleName());
-        Log.info("Creating employee data handler...");
-        Log.config("Populating employee data from employee factory");
+        Log.config("Creating employee data handler...",EmployeeDataHandler.class.getSimpleName());
+        Log.config("Populating employee data from employee factory", EmployeeDataHandler.class.getSimpleName());
         String[] employeeData = EmployeeFactory.getEmployees(1000);
 
-        Log.config("Creating employee object list from employee data");
+        Log.config("Creating employee object list from employee data",EmployeeDataHandler.class.getSimpleName());
         employeeList = new ArrayList<>(convertEmployeeDataListIntoObjects(employeeData));
-        Log.config("Employee list populated");
+        Log.config("Employee list populated",EmployeeDataHandler.class.getSimpleName());
     }
 
     public List<Employee> getEmployeeList() {
@@ -28,7 +27,7 @@ public class EmployeeDataHandler {
     }
 
     private List<Employee> convertEmployeeDataListIntoObjects(String[] employeeData) {
-        Log.config("Converting employee data list into objects...");
+        Log.config("Converting employee data list into objects...", EmployeeDataHandler.class.getSimpleName());
 
         List<Employee> employees = new ArrayList<>();
 
@@ -50,7 +49,7 @@ public class EmployeeDataHandler {
                     gender, email, dob, hireDate, salary);
             employees.add(employee);
         }
-        Log.config("Employee total: " + employees.size());
+        Log.config("Employee total: " + employees.size(), EmployeeDataHandler.class.getSimpleName());
 
         return employees;
     }

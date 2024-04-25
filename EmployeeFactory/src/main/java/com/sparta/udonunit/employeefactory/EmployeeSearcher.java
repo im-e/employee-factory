@@ -1,10 +1,9 @@
 package com.sparta.udonunit.employeefactory;
 
-import com.sparta.udonunit.logger.Log;
+import com.sparta.udonunit.logging.Log;
+import com.sparta.udonunit.logging.ResultHandler;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.List;
 
 public class EmployeeSearcher {
 
@@ -13,24 +12,32 @@ public class EmployeeSearcher {
     public static void init() throws IOException {
         // Init Logger
         Log.init();
-        Log.setClassName(EmployeeSearcher.class.getSimpleName());
-        Log.info("Program Started...");
+        Log.info("Program Started...", EmployeeSearcher.class.getSimpleName());
+        // Init Result Handler
+        ResultHandler.init();
         // New instance of employeeDataHandler
         EmployeeDataHandler employeeDataHandler = new EmployeeDataHandler();
         // employee repository is passed generated list of employees from EmployeeList
         employeeRepository = new EmployeeRepositoryImpl(employeeDataHandler.getEmployeeList());
+        Log.config("Employee searcher init complete", EmployeeSearcher.class.getSimpleName());
         //getEmployeeByID is passed the id of the first employee on the generated employee list, and returns the corresponding employee
         //System.out.println(employeeRepository.getEmployeesByHiredDateRange());
+        searchEmployeeByID(employeeRepository.getEmployees().getFirst().empId());
     }
 
     public static void searchEmployeeByID(int employeeID) {
         //get employee by id
         Employee employeeResult = employeeRepository.getEmployeeByID(employeeID);
+        ResultHandler.printSearchValue("Searching for employee under ID: ", String.valueOf(employeeID));
         if(employeeResult != null) {
-            // print employee
+            ResultHandler.printCorrectResult(employeeResult.toString());
         }
         else{
-            //return no employee found
+            ResultHandler.printInvalidResult("No employee found with ID: " + employeeID);
         }
+    }
+
+    public static void searchEmployeeByName(String employeeName) {
+
     }
 }

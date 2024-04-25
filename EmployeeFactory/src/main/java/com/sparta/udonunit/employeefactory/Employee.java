@@ -11,8 +11,8 @@ public record Employee(Integer empId, String title, String firstName, Character 
     @Override
     public String toString() {
         return
-                "Employee Details" + '\n' +
-                "Employee Id => " + empId + '\n' +
+                "Employee: " + title + " " + firstName + " " + lastName + '\n' +
+                ". Employee Id => " + empId + '\n' +
                 ". Employee Title => " + title + '\n' +
                 ". Employee First Name => " + firstName + '\n' +
                 ". Employee Middle Initial => " + middleInitial + '\n' +

@@ -1,12 +1,9 @@
-package com.sparta.udonunit.logger;
+package com.sparta.udonunit.logging;
 
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
 
-public class CustomFormatter extends Formatter {
-
-    public CustomFormatter() {
-    }
+public class LogFormatter extends Formatter {
 
     @Override
     public String format(LogRecord record) {

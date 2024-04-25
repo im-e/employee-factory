@@ -10,8 +10,6 @@ public class Main {
         EmployeeSearcher.init();
 
         EmployeeSearcher.searchEmployeeByID(294034);
-        //print employee
-        //log result to a file
 
 
 
