@@ -72,7 +72,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     //Retrieves employees with a partial or full last name match
     @Override
-    public List<Employee> getEmployeeByEitherPartialOrFullLastName(String partialOrFullLastName) {
+    public List<Employee> getEmployeeLastNameContaining(String partialOrFullLastName) {
         boolean employeeFound = false;
         List<Employee> showEmployeeData = new ArrayList<>();
         for (Employee employee : employees) {

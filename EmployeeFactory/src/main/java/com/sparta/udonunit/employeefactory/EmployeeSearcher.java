@@ -23,14 +23,6 @@ public class EmployeeSearcher {
         // employee repository is passed generated list of employees from EmployeeList
         employeeRepository = new EmployeeRepositoryImpl(employeeDataHandler.getEmployeeList());
         Log.config("Employee searcher init complete", EmployeeSearcher.class.getSimpleName());
-
-
-        //getEmployeeByID is passed the id of the first employee on the generated employee list, and returns the corresponding employee
-        //System.out.println(employeeRepository.getEmployeesByHiredDateRange());
-        searchEmployeeByID(employeeRepository.getEmployees().getFirst().empId());
-        searchEmployeesHiredWithinDateRange("1/20/1800", "1/20/1980");
-        searchEmployeesByAgeRange(10, 13);
-
     }
 
     public static String searchEmployeeByID(int employeeID) {
@@ -59,6 +51,7 @@ public class EmployeeSearcher {
             endRange = LocalDate.parse(rangeEnd, formatter);
         } catch (Exception e) {
             Log.warning(e.toString(), EmployeeSearcher.class.getSimpleName());
+            ResultHandler.printInvalidResult("Incorrect range format of (M/DD/YYYY): " + rangeStart);
             return "Invalid date entered";
         }
 
@@ -95,17 +88,17 @@ public class EmployeeSearcher {
         return result.toString();
     }
 
-    public static String searchEmployeesByPartialOrFullName(String partialOrFullLastName) {
+    public static String searchEmployeesByLastNameContains(String lastNameContains) {
         StringBuilder result = new StringBuilder();
-        List<Employee> employeesResult = employeeRepository.getEmployeeByEitherPartialOrFullLastName(partialOrFullLastName);
-        ResultHandler.printSearchValue("Searching for employee with the name: ", partialOrFullLastName);
+        List<Employee> employeesResult = employeeRepository.getEmployeeLastNameContaining(lastNameContains);
+        ResultHandler.printSearchValue("Searching for employee with the last name containing: ", lastNameContains);
         for (Employee employee : employeesResult) {
             if (employee.empId() != -1) {
                 ResultHandler.printCorrectResult(employee.toString());
                 result.append(employee.toString());
             } else {
-                ResultHandler.printInvalidResult("No employees found with the name: " + partialOrFullLastName);
-                result.append("No employees found with the name: ").append(partialOrFullLastName);
+                ResultHandler.printInvalidResult("No employees found with the last name containing: " + lastNameContains);
+                result.append("No employees found with the last name containing: ").append(lastNameContains);
             }
         }
         ResultHandler.endOfSearch();
@@ -115,18 +108,32 @@ public class EmployeeSearcher {
     public static String searchEmployeesBySalaryRange(Integer rangeStart, Integer rangeEnd) {
         StringBuilder result = new StringBuilder();
         List<Employee> employeesResult = employeeRepository.getEmployeeBySalaryRange(rangeStart, rangeEnd);
-        ResultHandler.printSearchValue("Searching for employee within the salary range: ", rangeStart + " -> " + rangeEnd);
+        ResultHandler.printSearchValue("Searching for employee within the salary range: ", "£"+rangeStart + " -> " + "£"+rangeEnd);
         for (Employee employee : employeesResult) {
             if (employee.empId() != -1) {
                 ResultHandler.printCorrectResult(employee.toString());
                 result.append(employee.toString());
             } else {
-                ResultHandler.printInvalidResult("No employees found within the salary range: " + rangeStart + " -> " + rangeEnd);
-                result.append("No employees found within the salary range: ").append(rangeStart).append(" -> ").append(rangeEnd);
+                ResultHandler.printInvalidResult("No employees found within the salary range: " + "£"+rangeStart + " -> " + "£"+rangeEnd);
+                result.append("No employees found within the salary range: ").append("£").append(rangeStart).append(" -> ").append("£").append(rangeEnd);
             }
         }
         ResultHandler.endOfSearch();
         return result.toString();
+    }
+
+    public static Employee getRandomEmployee() {
+        int randomIndex = (int) (Math.random() * employeeRepository.getEmployees().size());
+        return  employeeRepository.getEmployees().get(randomIndex);
+    }
+
+    public static int searchAllEmployees() {
+        ResultHandler.printSearchValue("Searching for all employees: ", String.valueOf(employeeRepository.getEmployees().size()));
+        for (Employee employee : employeeRepository.getEmployees()) {
+            ResultHandler.printCorrectResult(employee.toString());
+        }
+        ResultHandler.endOfSearch();
+        return employeeRepository.getEmployees().size();
     }
 
 }

@@ -55,9 +55,9 @@ public class EmployeeSearcherTests {
     @Test
     @DisplayName("test if correct message if shows if no employees found with particular last name")
     void testIfCorrectMessageIfShowsIfNoEmployeesFoundWithParticularLastName() {
-        String partialOrFullLastName = "ThisIsAFakeLastName";
-        String expectedResult = "No employees found with the name: " + partialOrFullLastName;
-        String actualResult = EmployeeSearcher.searchEmployeesByPartialOrFullName(partialOrFullLastName);
+        String inputtedQuery = "ThisIsAFakeLastName";
+        String expectedResult = "No employees found with the last name containing: " + inputtedQuery;
+        String actualResult = EmployeeSearcher.searchEmployeesByLastNameContains(inputtedQuery);
         Assertions.assertEquals(expectedResult, actualResult);
     }
 
@@ -66,9 +66,25 @@ public class EmployeeSearcherTests {
     void testToSeeIfCorrectMessageShowsIfNoEmployeesFoundWithinAParticularSalaryRange() {
         int rangeStart = 1;
         int rangeEnd = 2;
-        String expectedResult = "No employees found within the salary range: " + rangeStart + " -> " + rangeEnd;
+        String expectedResult = "No employees found within the salary range: " + "£"+rangeStart + " -> " + "£"+rangeEnd;
         String actualResult = EmployeeSearcher.searchEmployeesBySalaryRange(rangeStart, rangeEnd);
         Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("test if all employees are returned when all employees are searched")
+    void testIfAllEmployeesAreReturnedWhenAllEmployeesAreSearched() {
+        int expectedResult = 1000;
+        int actualResult = EmployeeSearcher.searchAllEmployees();
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("get random employee will return an existing random employee")
+    void getRandomEmployeeWillReturnAnExistingRandomEmployee() {
+        boolean employeeIsNotNull = EmployeeSearcher.getRandomEmployee() != null;
+        Assertions.assertTrue(employeeIsNotNull);
+
     }
 
 }

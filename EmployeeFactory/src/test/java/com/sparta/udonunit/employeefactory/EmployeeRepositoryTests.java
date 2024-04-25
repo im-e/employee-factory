@@ -58,7 +58,7 @@ public class EmployeeRepositoryTests {
         String givenLastName = "Bumgarner";
         int expectedID = 198429;
         boolean matchedExpectedID = false;
-        List<Employee> expectedEmployees = employeeRepository.getEmployeeByEitherPartialOrFullLastName(givenLastName);
+        List<Employee> expectedEmployees = employeeRepository.getEmployeeLastNameContaining(givenLastName);
         for (Employee employee : expectedEmployees) {
             if (employee.empId() == expectedID) {
                 matchedExpectedID = true;
@@ -76,7 +76,7 @@ public class EmployeeRepositoryTests {
         final int expectedID2 = 540293;
         boolean matchedExpectedID1 = false;
         boolean matchedExpectedID2 = false;
-        List<Employee> expectedEmployees = employeeRepository.getEmployeeByEitherPartialOrFullLastName(givenPartialLastName);
+        List<Employee> expectedEmployees = employeeRepository.getEmployeeLastNameContaining(givenPartialLastName);
         for (Employee employee : expectedEmployees) {
             switch (employee.empId()) {
                 case expectedID1 -> matchedExpectedID1 = true;

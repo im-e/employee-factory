@@ -11,7 +11,7 @@ public interface EmployeeRepository {
 
     List<Employee> getEmployeeByAgeRange(Integer minAge, Integer maxAge);
 
-    List<Employee> getEmployeeByEitherPartialOrFullLastName(String partialLastName);
+    List<Employee> getEmployeeLastNameContaining(String partialLastName);
 
     List<Employee> getEmployeeBySalaryRange(Integer minSalary, Integer maxSalary);
 

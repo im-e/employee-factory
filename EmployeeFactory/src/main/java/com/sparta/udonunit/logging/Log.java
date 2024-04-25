@@ -43,12 +43,6 @@ public class Log {
         return fileHandler;
     }
 
-
-    public static void severe(String logging, String currentClassName) {
-        CONSOLE_LOGGER.severe(ANSI_RED + "(" + currentClassName + ") " + logging + ANSI_RESET);
-        FILE_LOGGER.severe(logging);
-    }
-
     public static void warning(String logging, String currentClassName) {
         CONSOLE_LOGGER.warning(ANSI_YELLOW + "(" + currentClassName + ") " + logging + ANSI_RESET);
         FILE_LOGGER.warning(logging);
@@ -62,10 +56,6 @@ public class Log {
     public static void config(String logging, String currentClassName) {
         CONSOLE_LOGGER.config(ANSI_BLUE + "(" + currentClassName + ") " + logging + ANSI_RESET);
         FILE_LOGGER.config(logging);
-    }
-
-    public void fine(String logging, String currentClassName) {
-        FILE_LOGGER.config("(" + currentClassName + ") " + logging);
     }
 
 

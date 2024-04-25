@@ -42,8 +42,8 @@ public class ResultHandler {
         String currentHour = String.valueOf(LocalTime.now().getHour());
         String currentMin = String.valueOf(LocalTime.now().getMinute());
         String currentSec = String.valueOf(LocalTime.now().getSecond());
-        String currentTime = currentHour + "h" + currentMin + "m" + currentSec;
-        FileHandler fileHandler = new FileHandler("src/main/resources/results-" + currentDay + " - " + currentTime + ".txt");
+        String currentTime = currentHour + "-" + currentMin + "-" + currentSec;
+        FileHandler fileHandler = new FileHandler("src/main/resources/SearchResult-" + currentDay + "---" + currentTime + ".txt");
         fileHandler.setLevel(Level.ALL);
         fileHandler.setFormatter(new SearchFormatter());
 
@@ -62,8 +62,7 @@ public class ResultHandler {
     }
 
     public static void printCorrectResult(String result) {
-        PRINTER.info(ANSI_GREEN + result + ANSI_RESET);
-
+        PRINTER.info(ANSI_GREEN + result + ANSI_RESET + "\n");
         saveToFile(result);
     }
 
