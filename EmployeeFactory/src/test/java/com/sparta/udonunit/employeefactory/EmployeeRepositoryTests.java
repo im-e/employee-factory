@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import javax.print.attribute.standard.PageRanges;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,21 +19,21 @@ public class EmployeeRepositoryTests {
 
     @BeforeEach
     public void setUpBeforeClass() throws Exception {
-        Employee e1 = new Employee(198429,"Mrs.","Serafina","I","Bumgarner",
-                "F","serafina.bumgarner@exxonmobil.com",
-                LocalDate.parse("9/21/1982", DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                LocalDate.parse("2/1/2008", DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                ,69294);
-        Employee e2 = new Employee(178566,"Mrs.","Juliette","M","Rojo",
-                "F","juliette.rojo@yahoo.co.uk",
-                LocalDate.parse("5/8/1967", DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                LocalDate.parse("26/4/2011", DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                ,193912);
-        Employee e3 = new Employee(540293,"Mrs.","Jerafina","I","Bumjarner",
-                "F","jerafina.bumjarner@exxonmobil.com",
-                LocalDate.parse("9/21/1982", DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                LocalDate.parse("2/1/2008", DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                ,69295);
+        Employee e1 = new Employee(198429, "Mrs.", "Serafina", "I", "Bumgarner",
+                "F", "serafina.bumgarner@exxonmobil.com",
+                LocalDate.parse("9/21/1982", DateTimeFormatter.ofPattern("M/d/y")),
+                LocalDate.parse("2/1/2008", DateTimeFormatter.ofPattern("M/d/y"))
+                , 69294);
+        Employee e2 = new Employee(178566, "Mrs.", "Juliette", "M", "Rojo",
+                "F", "juliette.rojo@yahoo.co.uk",
+                LocalDate.parse("5/8/1967", DateTimeFormatter.ofPattern("M/d/y")),
+                LocalDate.parse("5/26/2011", DateTimeFormatter.ofPattern("M/d/y"))
+                , 193912);
+        Employee e3 = new Employee(540293, "Mrs.", "Jerafina", "I", "Bumjarner",
+                "F", "jerafina.bumjarner@exxonmobil.com",
+                LocalDate.parse("9/21/1982", DateTimeFormatter.ofPattern("M/d/y")),
+                LocalDate.parse("2/1/2008", DateTimeFormatter.ofPattern("M/d/y"))
+                , 69295);
 
         employees = new ArrayList<>();
         employees.add(e1);
@@ -49,7 +50,7 @@ public class EmployeeRepositoryTests {
         int givenID = 198429;
         String expectedFirstName = "Serafina";
         String searchedFirstName = employeeRepository.getEmployeeByID(givenID).firstName();
-        Assertions.assertEquals(expectedFirstName,searchedFirstName);
+        Assertions.assertEquals(expectedFirstName, searchedFirstName);
     }
 
     //Last name tests start
@@ -60,7 +61,7 @@ public class EmployeeRepositoryTests {
         int expectedID = 198429;
         boolean matchedExpectedID = false;
         List<Employee> expectedEmployees = employeeRepository.getEmployeesByLastName(givenLastName);
-        for(Employee employee : expectedEmployees) {
+        for (Employee employee : expectedEmployees) {
             if (employee.empId() == expectedID) {
                 matchedExpectedID = true;
                 break;
@@ -78,8 +79,8 @@ public class EmployeeRepositoryTests {
         boolean matchedExpectedID1 = false;
         boolean matchedExpectedID2 = false;
         List<Employee> expectedEmployees = employeeRepository.getEmployeesByLastName(givenPartialLastName);
-        for(Employee employee : expectedEmployees) {
-            switch(employee.empId()){
+        for (Employee employee : expectedEmployees) {
+            switch (employee.empId()) {
                 case expectedID1 -> matchedExpectedID1 = true;
                 case expectedID2 -> matchedExpectedID2 = true;
             }
@@ -93,46 +94,48 @@ public class EmployeeRepositoryTests {
     @Test
     @DisplayName("Given two dates should return all employees hired within those dates")
     void givenTwoDatesShouldReturnAllEmployeesHiredWithinThoseDates() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        String strStartDate = "1/1/2008";
-        LocalDate startDate = LocalDate.parse(strStartDate, formatter);
-        String strEndDate = "3/1/2008";
-        LocalDate endDate = LocalDate.parse(strEndDate, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+        LocalDate startDate = LocalDate.parse("1/1/2008", formatter);
+        LocalDate endDate = LocalDate.parse("3/1/2008", formatter);
 
-        List<Employee> result = employeeRepository.getEmployeesByHiredDateRange(startDate, endDate);
+        final int expectedID1 = 198429;
+        final int expectedID2 = 540293;
+        boolean matchedExpectedID1 = false;
+        boolean matchedExpectedID2 = false;
 
-        List<Employee> expectedEmployees = new ArrayList<>(employees);
-
-        Assertions.assertEquals(expectedEmployees.size(), result.size());
-        Assertions.assertTrue(result.containsAll(expectedEmployees));
-
-    }
-
-        @Test
-        @DisplayName("Given two dates should return all employees born within those dates")
-        void givenTwoDatesReturnAllEmployeesHiredWithinThoseDates(){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            String strStartDate = "9/22/1982";
-            LocalDate startDate = LocalDate.parse(strStartDate, formatter);
-            String strEndDate = "9/19/1982";
-            LocalDate endDate = LocalDate.parse(strEndDate, formatter);
-
-            List<Employee> result = employeeRepository.getEmployeesByHiredDateRange(startDate, endDate);
-            List<Employee> expectedEmployees = new ArrayList<>(employees);
-
-            Assertions.assertEquals(expectedEmployees.size(), result.size());
-            Assertions.assertTrue(result.containsAll(expectedEmployees));
-
-
+        List<Employee> expectedEmployees = employeeRepository.getEmployeesByHiredDateRange(startDate, endDate);
+        for (Employee employee : expectedEmployees) {
+            switch (employee.empId()) {
+                case expectedID1 -> matchedExpectedID1 = true;
+                case expectedID2 -> matchedExpectedID2 = true;
+            }
         }
 
+        Assertions.assertTrue(matchedExpectedID1);
+        Assertions.assertTrue(matchedExpectedID2);
+
     }
 
+    @Test
+    @DisplayName("Given two dates should return all employees born within those dates")
+    void givenTwoDatesReturnAllEmployeesHiredWithinThoseDates() {
+        int ageRangeStart = 40;
+        int ageRangeEnd = 43;
+        final int expectedID1 = 198429;
+        final int expectedID2 = 540293;
+        boolean matchedExpectedID1 = false;
+        boolean matchedExpectedID2 = false;
 
+        List<Employee> expectedEmployees = employeeRepository.getEmployeeByAgeRange(ageRangeStart, ageRangeEnd);
+        for (Employee employee : expectedEmployees) {
+            switch (employee.empId()) {
+                case expectedID1 -> matchedExpectedID1 = true;
+                case expectedID2 -> matchedExpectedID2 = true;
+            }
+        }
+        Assertions.assertTrue(matchedExpectedID1);
+        Assertions.assertTrue(matchedExpectedID2);
 
-
-
-
-
+    }
 
 }
