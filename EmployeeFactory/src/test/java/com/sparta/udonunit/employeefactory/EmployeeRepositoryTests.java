@@ -92,7 +92,7 @@ public class EmployeeRepositoryTests {
 
     @Test
     @DisplayName("Given two dates should return all employees hired within those dates")
-    void givenTwoDateShouldReturnAllEmployeesHiredWithThoseDates(){
+    void givenTwoDatesShouldReturnAllEmployeesHiredWithinThoseDates() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String strStartDate = "1/1/2008";
         LocalDate startDate = LocalDate.parse(strStartDate, formatter);
@@ -106,6 +106,33 @@ public class EmployeeRepositoryTests {
         Assertions.assertEquals(expectedEmployees.size(), result.size());
         Assertions.assertTrue(result.containsAll(expectedEmployees));
 
+    }
+
+        @Test
+        @DisplayName("Given two dates should return all employees born within those dates")
+        void givenTwoDatesReturnAllEmployeesHiredWithinThoseDates(){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String strStartDate = "9/22/1982";
+            LocalDate startDate = LocalDate.parse(strStartDate, formatter);
+            String strEndDate = "9/19/1982";
+            LocalDate endDate = LocalDate.parse(strEndDate, formatter);
+
+            List<Employee> result = employeeRepository.getEmployeesByHiredDateRange(startDate, endDate);
+            List<Employee> expectedEmployees = new ArrayList<>(employees);
+
+            Assertions.assertEquals(expectedEmployees.size(), result.size());
+            Assertions.assertTrue(result.containsAll(expectedEmployees));
+
+
+        }
 
     }
+
+
+
+
+
+
+
+
 }
