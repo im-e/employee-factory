@@ -33,11 +33,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public List<Employee> getEmployeesByHiredDateRange(LocalDate startDate, LocalDate endDate) {
         List<Employee> employeesResult = new ArrayList<>();
+        // convert string input
+
+        
+        boolean employeeFound = false;
         for (Employee employee: employees) {
             if (employeeIsHiredWithinDateRange(employee, startDate, endDate)) {
                 employeesResult.add(employee);
-            }else{
-                return null;
+                employeeFound = true;
+            }if(!employeeFound){
+                employeesResult.add(new Employee(-1, "No Employee Found", "-", '-',"-",
+                        '-',"-",null,null,-1));
             }
         }
         return employeesResult;
