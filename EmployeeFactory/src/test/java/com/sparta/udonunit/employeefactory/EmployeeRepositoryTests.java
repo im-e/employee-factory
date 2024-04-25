@@ -1,5 +1,6 @@
 package com.sparta.udonunit.employeefactory;
 
+import com.sparta.udonunit.logging.ResultHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -95,8 +96,10 @@ public class EmployeeRepositoryTests {
     @DisplayName("Given two dates should return all employees hired within those dates")
     void givenTwoDatesShouldReturnAllEmployeesHiredWithinThoseDates() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/y");
+
         LocalDate startDate = LocalDate.parse("1/1/2008", formatter);
         LocalDate endDate = LocalDate.parse("3/1/2008", formatter);
+
 
         final int expectedID1 = 198429;
         final int expectedID2 = 540293;
@@ -137,5 +140,30 @@ public class EmployeeRepositoryTests {
         Assertions.assertTrue(matchedExpectedID2);
 
     }
+
+    @Test
+    @DisplayName("given a salary range, should return all employees earning between that salary range")
+    void givenASalaryRangeShouldReturnAllEmployeesEarningBetweenThatSalaryRange() {
+        int salaryRangeStart = 69294;
+        int salaryRangeEnd = 69295;
+
+        boolean withinRange = true;
+
+        List<Employee> expectedEmployees = employeeRepository.getEmployeeBySalaryRange(salaryRangeStart, salaryRangeEnd);
+            for(Employee employee : expectedEmployees) {
+                if (employee.salary() >= salaryRangeStart && employee.salary() <= salaryRangeEnd) {
+                    withinRange = true;
+                } else {
+                    withinRange = false;
+                }
+            }
+
+            Assertions.assertTrue(withinRange);
+        
+    }
+
+
+
+
 
 }

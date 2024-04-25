@@ -4,10 +4,16 @@ import java.time.LocalDate;
 
 /**
  * @param dob Date of Birth
+ *
+ * Represents an Employee record with various attributes.
  */
 public record Employee(Integer empId, String title, String firstName, Character middleInitial, String lastName, Character gender,
                        String email, LocalDate dob, LocalDate hireDate, Integer salary) {
 
+    /**
+     * Overrides the toString method to provide a formatted representation of the employee.
+     * @return String representation of the employee.
+     */
     @Override
     public String toString() {
         return
@@ -21,8 +27,7 @@ public record Employee(Integer empId, String title, String firstName, Character 
                 ". Employee Email Address => " + email + '\n' +
                 ". Employee Date of Birth (YYYY-MM-DD) => " + dob + '\n' +
                 ". Employee Hire Date (YYYY-MM-DD) => " + hireDate +'\n' +
-                ". Employee Salary => " + "£" + salary + '\n' +
-                "-------------------------------------------------"
+                ". Employee Salary => " + "£" + salary
                 ;
     }
 }
