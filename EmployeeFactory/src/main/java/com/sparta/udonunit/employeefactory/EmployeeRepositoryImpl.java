@@ -1,6 +1,7 @@
 package com.sparta.udonunit.employeefactory;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
@@ -13,11 +14,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Employee getEmployeeByID(Integer id) {
+        for (Employee employee : employees ){
+            if(employee.empId() == id){
+                return employee;
+            }
+        }
         return null;
     }
 
     @Override
     public List<Employee> getEmployeesByHiredDateRange(LocalDate startDate, LocalDate endDate) {
+        List<Employee> employees = new ArrayList<>();
         return List.of();
     }
 
