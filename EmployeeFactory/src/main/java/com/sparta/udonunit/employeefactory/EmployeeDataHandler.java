@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.sparta.udonunit.logging.Log;
 
 public class EmployeeDataHandler {
@@ -13,13 +14,13 @@ public class EmployeeDataHandler {
 
     // Constructor populates employeeList by calling EmployeeFactory.
     public EmployeeDataHandler() throws IOException {
-        Log.config("Creating employee data handler...",EmployeeDataHandler.class.getSimpleName());
+        Log.config("Creating employee data handler...", EmployeeDataHandler.class.getSimpleName());
         Log.config("Populating employee data from employee factory", EmployeeDataHandler.class.getSimpleName());
         String[] employeeData = EmployeeFactory.getEmployees(1000);
 
-        Log.config("Creating employee object list from employee data",EmployeeDataHandler.class.getSimpleName());
+        Log.config("Creating employee object list from employee data", EmployeeDataHandler.class.getSimpleName());
         employeeList = new ArrayList<>(convertEmployeeDataListIntoObjects(employeeData));
-        Log.config("Employee list populated",EmployeeDataHandler.class.getSimpleName());
+        Log.config("Employee list populated", EmployeeDataHandler.class.getSimpleName());
     }
 
     public List<Employee> getEmployeeList() {

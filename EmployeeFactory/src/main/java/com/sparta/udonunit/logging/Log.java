@@ -27,7 +27,7 @@ public class Log {
         FILE_LOGGER.setLevel(Level.ALL);
     }
 
-    private static ConsoleHandler getConsoleHandler(){
+    private static ConsoleHandler getConsoleHandler() {
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.CONFIG);
         consoleHandler.setFormatter(new LogFormatter());
@@ -65,9 +65,8 @@ public class Log {
     }
 
     public void fine(String logging, String currentClassName) {
-        FILE_LOGGER.config( "(" + currentClassName + ") " + logging);
+        FILE_LOGGER.config("(" + currentClassName + ") " + logging);
     }
-
 
 
 }

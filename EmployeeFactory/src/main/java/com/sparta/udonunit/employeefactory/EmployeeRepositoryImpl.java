@@ -2,7 +2,6 @@ package com.sparta.udonunit.employeefactory;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     }
 
     //Calculates the age of an employee based on their date of birth and a given date
-    public int calculateAge(LocalDate dob, LocalDate today){
+    public int calculateAge(LocalDate dob, LocalDate today) {
         return Period.between(dob, today).getYears();
     }
 
@@ -40,13 +39,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         List<Employee> employeesResult = new ArrayList<>();
 
         boolean employeeFound = false;
-        for (Employee employee: employees) {
+        for (Employee employee : employees) {
             if (employeeIsHiredWithinDateRange(employee, startDate, endDate)) {
                 employeesResult.add(employee);
                 employeeFound = true;
             }
         }
-        if(!employeeFound){
+        if (!employeeFound) {
             employeesResult.add(returnNullEmployee());
         }
         return employeesResult;
@@ -57,15 +56,15 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public List<Employee> getEmployeeByAgeRange(Integer minAge, Integer maxAge) {
         List<Employee> showEmployeeData = new ArrayList<>();
         boolean employeeFound = false;
-        for (Employee employee : employees ){
+        for (Employee employee : employees) {
             LocalDate dateOfBirth = employee.dob();
             int age = calculateAge(dateOfBirth, LocalDate.now());
-            if(age>=minAge && age<=maxAge){
+            if (age >= minAge && age <= maxAge) {
                 showEmployeeData.add(employee);
                 employeeFound = true;
             }
         }
-        if(!employeeFound){
+        if (!employeeFound) {
             showEmployeeData.add(returnNullEmployee());
         }
         return showEmployeeData;
@@ -76,13 +75,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public List<Employee> getEmployeeByEitherPartialOrFullLastName(String partialOrFullLastName) {
         boolean employeeFound = false;
         List<Employee> showEmployeeData = new ArrayList<>();
-        for(Employee employee : employees){
-            if(employee.lastName().contains(partialOrFullLastName)){
+        for (Employee employee : employees) {
+            if (employee.lastName().contains(partialOrFullLastName)) {
                 showEmployeeData.add(employee);
                 employeeFound = true;
             }
         }
-        if(!employeeFound){
+        if (!employeeFound) {
             showEmployeeData.add(returnNullEmployee());
         }
         return showEmployeeData;
@@ -92,21 +91,21 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     public List<Employee> getEmployeeBySalaryRange(Integer minSalary, Integer maxSalary) {
         List<Employee> showEmployeeData = new ArrayList<>();
         boolean employeeFound = false;
-        for (Employee employee : employees ){
-            if(employee.salary() >= minSalary && employee.salary() <= maxSalary){
+        for (Employee employee : employees) {
+            if (employee.salary() >= minSalary && employee.salary() <= maxSalary) {
                 showEmployeeData.add(employee);
                 employeeFound = true;
             }
         }
-        if(!employeeFound){
+        if (!employeeFound) {
             showEmployeeData.add(returnNullEmployee());
         }
         return showEmployeeData;
     }
 
     private Employee returnNullEmployee() {
-        return new Employee(-1, "No Employee Found", "-", '-',"-",
-                '-',"-",null,null,-1);
+        return new Employee(-1, "No Employee Found", "-", '-', "-",
+                '-', "-", null, null, -1);
     }
 
     //Retrieves the list of all employees

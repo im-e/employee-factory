@@ -2,10 +2,6 @@ package com.sparta.udonunit.employeefactory;
 
 import org.junit.jupiter.api.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
 public class EmployeeSearcherTests {
 
     @BeforeAll

@@ -1,14 +1,11 @@
 package com.sparta.udonunit.employeefactory;
 
-import com.sparta.udonunit.logging.ResultHandler;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import javax.print.attribute.standard.PageRanges;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -150,16 +147,13 @@ public class EmployeeRepositoryTests {
         boolean withinRange = true;
 
         List<Employee> expectedEmployees = employeeRepository.getEmployeeBySalaryRange(salaryRangeStart, salaryRangeEnd);
-            for(Employee employee : expectedEmployees) {
-                withinRange = employee.salary() >= salaryRangeStart && employee.salary() <= salaryRangeEnd;
-            }
+        for (Employee employee : expectedEmployees) {
+            withinRange = employee.salary() >= salaryRangeStart && employee.salary() <= salaryRangeEnd;
+        }
 
-            Assertions.assertTrue(withinRange);
-        
+        Assertions.assertTrue(withinRange);
+
     }
-
-
-
 
 
 }

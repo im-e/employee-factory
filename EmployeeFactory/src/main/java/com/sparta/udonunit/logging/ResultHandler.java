@@ -29,7 +29,7 @@ public class ResultHandler {
     }
 
 
-    private static ConsoleHandler getConsoleHandler(){
+    private static ConsoleHandler getConsoleHandler() {
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.CONFIG);
         consoleHandler.setFormatter(new SearchFormatter());
@@ -43,23 +43,22 @@ public class ResultHandler {
         String currentMin = String.valueOf(LocalTime.now().getMinute());
         String currentSec = String.valueOf(LocalTime.now().getSecond());
         String currentTime = currentHour + "h" + currentMin + "m" + currentSec;
-        FileHandler fileHandler = new FileHandler("src/main/resources/results-"+ currentDay + " - " + currentTime + ".txt");
+        FileHandler fileHandler = new FileHandler("src/main/resources/results-" + currentDay + " - " + currentTime + ".txt");
         fileHandler.setLevel(Level.ALL);
         fileHandler.setFormatter(new SearchFormatter());
 
         return fileHandler;
     }
 
-    public static void endOfSearch()
-    {
+    public static void endOfSearch() {
         PRINTER.info("-------------------------------------");
         saveToFile("-------------------------------------");
     }
 
-    public static void printSearchValue(String searchTerm,String value){
+    public static void printSearchValue(String searchTerm, String value) {
         PRINTER.info(ANSI_BLUE + searchTerm + ANSI_YELLOW + value + ANSI_RESET);
 
-        saveToFile(searchTerm  + value);
+        saveToFile(searchTerm + value);
     }
 
     public static void printCorrectResult(String result) {

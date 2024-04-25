@@ -7,7 +7,7 @@ public class SearchFormatter extends Formatter {
 
     @Override
     public String format(LogRecord record) {
-        return  record.getMessage()
+        return record.getMessage()
                 + "\n";
     }
 }
