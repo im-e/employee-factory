@@ -151,11 +151,7 @@ public class EmployeeRepositoryTests {
 
         List<Employee> expectedEmployees = employeeRepository.getEmployeeBySalaryRange(salaryRangeStart, salaryRangeEnd);
             for(Employee employee : expectedEmployees) {
-                if (employee.salary() >= salaryRangeStart && employee.salary() <= salaryRangeEnd) {
-                    withinRange = true;
-                } else {
-                    withinRange = false;
-                }
+                withinRange = employee.salary() >= salaryRangeStart && employee.salary() <= salaryRangeEnd;
             }
 
             Assertions.assertTrue(withinRange);
