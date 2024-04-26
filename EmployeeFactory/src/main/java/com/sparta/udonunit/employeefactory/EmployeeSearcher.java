@@ -22,7 +22,8 @@ public class EmployeeSearcher {
         EmployeeDataHandler employeeDataHandler = new EmployeeDataHandler();
         // employee repository is passed generated list of employees from EmployeeList
         employeeRepository = new EmployeeRepositoryImpl(employeeDataHandler.getEmployeeList());
-        Log.config("Employee searcher init complete", EmployeeSearcher.class.getSimpleName());
+        Log.info("Employee searcher initialised", EmployeeSearcher.class.getSimpleName());
+        Log.info("Beginning searches...", EmployeeSearcher.class.getSimpleName());
     }
 
     public static String searchEmployeeByID(int employeeID) {
@@ -30,14 +31,19 @@ public class EmployeeSearcher {
         Employee employeeResult = employeeRepository.getEmployeeByID(employeeID);
         ResultHandler.printSearchValue("Searching for employee under ID: ", String.valueOf(employeeID));
         if (employeeResult != null) {
+            Log.config("Employee found under ID: " + employeeID, EmployeeSearcher.class.getSimpleName());
             ResultHandler.printCorrectResult(employeeResult.toString());
             ResultHandler.endOfSearch();
+            Log.fine("End of search.", EmployeeSearcher.class.getSimpleName());
             return employeeResult.toString();
         } else {
+            Log.config("No employee found with ID:  " + employeeID, EmployeeSearcher.class.getSimpleName());
             ResultHandler.printInvalidResult("No employee found with ID: " + employeeID);
             ResultHandler.endOfSearch();
+            Log.fine("End of search.", EmployeeSearcher.class.getSimpleName());
             return "No employee found with ID: " + employeeID;
         }
+
     }
 
     public static String searchEmployeesHiredWithinDateRange(String rangeStart, String rangeEnd) {

@@ -45,17 +45,21 @@ public class Log {
 
     public static void warning(String logging, String currentClassName) {
         CONSOLE_LOGGER.warning(ANSI_YELLOW + "(" + currentClassName + ") " + logging + ANSI_RESET);
-        FILE_LOGGER.warning(logging);
+        FILE_LOGGER.warning("(" + currentClassName + ") " +logging);
     }
 
     public static void info(String logging, String currentClassName) {
         CONSOLE_LOGGER.info(ANSI_GREEN + "(" + currentClassName + ") " + logging + ANSI_RESET);
-        FILE_LOGGER.info(logging);
+        FILE_LOGGER.info("(" + currentClassName + ") " +logging);
     }
 
     public static void config(String logging, String currentClassName) {
         CONSOLE_LOGGER.config(ANSI_BLUE + "(" + currentClassName + ") " + logging + ANSI_RESET);
-        FILE_LOGGER.config(logging);
+        FILE_LOGGER.config("(" + currentClassName + ") " + logging);
+    }
+
+    public static void fine(String logging, String currentClassName) {
+        FILE_LOGGER.fine("(" + currentClassName + ") " + logging);
     }
 
 

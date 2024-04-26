@@ -21,6 +21,7 @@ public class EmployeeDataHandler {
         Log.config("Creating employee object list from employee data", EmployeeDataHandler.class.getSimpleName());
         employeeList = new ArrayList<>(convertEmployeeDataListIntoObjects(employeeData));
         Log.config("Employee list populated", EmployeeDataHandler.class.getSimpleName());
+        Log.config("EmployeeSearcher can be used", EmployeeDataHandler.class.getSimpleName());
     }
 
     public List<Employee> getEmployeeList() {
