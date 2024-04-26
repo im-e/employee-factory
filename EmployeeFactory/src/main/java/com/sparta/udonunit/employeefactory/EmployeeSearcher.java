@@ -139,6 +139,7 @@ public class EmployeeSearcher {
             ResultHandler.printCorrectResult(employee.toString());
         }
         ResultHandler.endOfSearch();
+        Log.fine("End of search.", EmployeeSearcher.class.getSimpleName());
         return employeeRepository.getEmployees().size();
     }
 

@@ -30,7 +30,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     //Retrieves an employee by their ID
     @Override
     public Employee getEmployeeByID(Integer id) {
-        Log.config("Getting employee with the ID of :" + id.toString(), EmployeeRepositoryImpl.class.getSimpleName());
+        Log.config("Getting employee with the ID of: " + id.toString(), EmployeeRepositoryImpl.class.getSimpleName());
         return employees.stream().filter(employee -> employee.empId().equals(id)).findFirst().orElse(null);
     }
 
@@ -113,7 +113,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
         }
         if (!employeeFound) {
-            Log.fine("No employee found within salary range: " + "£"+ minSalary + " -> " + "£", EmployeeRepositoryImpl.class.getSimpleName());
+            Log.fine("No employee found within salary range: " + "£"+minSalary + " -> " + "£"+maxSalary, EmployeeRepositoryImpl.class.getSimpleName());
             showEmployeeData.add(returnNullEmployee());
         }
         Log.config("End of search.", EmployeeRepositoryImpl.class.getSimpleName());
